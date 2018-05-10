@@ -1,5 +1,4 @@
 package com.akushwah.examples.dp.composite;
-
 public class HtmlElement extends HtmlTag{
 
 	private String tagName;

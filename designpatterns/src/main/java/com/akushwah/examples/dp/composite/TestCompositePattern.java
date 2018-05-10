@@ -15,6 +15,7 @@ public class TestCompositePattern {
 		HtmlTag child1 = new HtmlElement("<p>");
 		child1.setStartTag("<p>");
 		child1.setEndTag("</p>");
+		
 		child1.setTagBody("Testing html tag library");
 		p1.addChildTag(child1);
 		
