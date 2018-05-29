@@ -23,6 +23,8 @@ spring:
           searchPaths: properties-git
         native:
           searchLocations: file:../properties-local
+  #profiles:
+  #  active: native    
 
 # Activate this using -Dspring.profiles.active=native
 #  profiles:

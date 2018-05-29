@@ -1,0 +1,11 @@
+version: '3'
+services:
+    config-server:
+        image: 'config-server'
+        ports:
+          - 8888:8888
+    client:
+        image: 'boot-client'
+        ports:
+          - 8889:8889
+    
