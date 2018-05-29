@@ -1,11 +1,13 @@
 version: '3'
 services:
     config-server:
-        image: 'config-server'
+        build: spring-cloud-config-server
         ports:
           - 8888:8888
     client:
-        image: 'boot-client'
+        build: spring-boot-client
         ports:
           - 8889:8889
+        depends_on:
+          - config-server
     
