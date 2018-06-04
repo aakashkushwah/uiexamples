@@ -5,6 +5,7 @@ public class Employee {
 	private String lastName;
 	private int salary;
 	private String city;
+	private String level;
 
 	public Employee(String firstName, String lastName, int salary) {
 		this.firstName = firstName;
@@ -40,10 +41,27 @@ public class Employee {
 		return "Metro";
 	}
 	
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
 
 	@Override
 	public String toString() {
-		return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", salary=" + salary + "]";
+		return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", salary=" + salary + ", city=" + city
+				+ ", level=" + level + "]";
 	}
+
+	
+
+	
 
 }

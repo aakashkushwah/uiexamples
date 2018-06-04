@@ -5,6 +5,11 @@ public class TypeInferenceExample {
 		SqRootLambda ex = (int i) ->  {return Math.sqrt(i);};
 		System.out.println(ex.cube(345));
 		
+		ex = (i) ->  {return Math.sqrt(i);};
+		System.out.println(ex.cube(345));
+		
+		ex = i ->  Math.sqrt(i);
+		System.out.println(ex.cube(345));
 	}
 	
 	
