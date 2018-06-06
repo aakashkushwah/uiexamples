@@ -13,4 +13,4 @@ endpoints:
     enabled: true
 logging:
   level:
-    org.apache.zookeeper.ClientCnxn: WARN
+    org.apache.zookeeper.ClientCnxn: DEBUG
