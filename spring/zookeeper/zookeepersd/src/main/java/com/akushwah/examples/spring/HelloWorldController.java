@@ -5,15 +5,19 @@
  */
 package com.akushwah.examples.spring;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
 
+	@Value("${server.port}")
+	private String value;
+	
 	@GetMapping("/hellozoosd")
 	public String HelloWorld() {
-		return "Hello World via zookeeper-sd!";
+		return "Hello World via zookeeper-sd! "+value;
 	}
 
 }

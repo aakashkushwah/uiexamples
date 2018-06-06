@@ -43,10 +43,13 @@ public class HelloWorldClient {
 
 	public String serviceUrl() {
 	    List<ServiceInstance> list = discoveryClient.getInstances("zookeepersd");
-	    if (list != null && list.size() > 0 ) {
-	        return list.get(0).getUri().toString();
-	    }
-	    return null;
+	    
+	    StringBuffer sb = new StringBuffer();
+	    for (ServiceInstance serviceInstance : list) {
+			sb.append(serviceInstance.getUri().toString()+"\n");
+			break;
+		}
+	    return sb.toString();
 	}
 
 	public String HelloWorld() {
