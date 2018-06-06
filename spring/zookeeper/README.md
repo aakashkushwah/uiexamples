@@ -11,3 +11,10 @@ http://localhost:8083/get-greeting
 
 About Zookeeper more details
 https://github.com/spring-cloud/spring-cloud-zookeeper/blob/master/docs/src/main/asciidoc/spring-cloud-zookeeper.adoc
+
+Installing exhibitor
+https://github.com/soabase/exhibitor/wiki/Building-Exhibitor
+download pom, run mvn clean package
+run by using
+java -jar exhibitor.*.jar -c file --port=8093
+
