@@ -8,3 +8,6 @@ Run the client project by running the GreetingApplication
 
 Test the client application at
 http://localhost:8083/get-greeting
+
+About Zookeeper more details
+https://github.com/spring-cloud/spring-cloud-zookeeper/blob/master/docs/src/main/asciidoc/spring-cloud-zookeeper.adoc
