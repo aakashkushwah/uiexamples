@@ -1,5 +1,7 @@
 package com.akushwah.examples.bootse1;
 
+import java.awt.Color;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +15,7 @@ public class MyRestController {
 		User user1 = new User();
 		user1.setName("Aakash");
 		user1.setUrl("Joker "+user);
+		user1.setFavoriteColor(Color.CYAN);
 		System.out.println(user1);
 		return user1;
 	}
