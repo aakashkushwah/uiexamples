@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class DemoStream {
 	public static void main(String[] args) {
@@ -34,5 +35,6 @@ public class DemoStream {
 		System.out.println(list.stream().parallel().collect( () -> new StringBuffer() , (StringBuffer l, String b)->l.append(b), (StringBuffer a, StringBuffer b)->(a.append(b)).toString()));
 		
 		System.out.println(list.stream().parallel().collect( StringBuffer::new , StringBuffer::append, StringBuffer::append));
+		IntStream.rangeClosed(1, 20).forEach(System.out::print);
 	}
 }
