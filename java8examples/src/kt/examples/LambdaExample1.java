@@ -1,7 +1,10 @@
 package kt.examples;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import com.akushwah.java8.examples.Person;
@@ -36,9 +39,55 @@ public class LambdaExample1 {
 		});
 		
 		
+		doSomething(a->System.out.println(a), s);
+		doSomething(a->{System.out.println(a); System.out.println("asdf");}, s);
 
+		System.out.println(doSomethingFunction(a -> {return a+"123";}, "456"));
+		
+		String suffix= "0";
+		doSomethingFunction(new Function<String, String>() {
+
+			@Override
+			public String apply(String t) {
+				return t+"123";
+			}
+		}, s);
+		
+		
+		List<String> list = new ArrayList<>();
+		list.add("abc");
+		list.add("xyz");
+		
+		
+		
+		System.out.println(doSomethingFunction1( l -> l.get(0)+suffix, list));
+		System.out.println(doSomethingFunction1( l -> l.get(1)+suffix, list));
+		
+		
+		System.out.println(checkPredicate(l-> l.size() ==2, list));
+		
+		
+		System.out.println(checkPredicate(l-> l.get(0).startsWith("a"), list));
+		System.out.println(checkPredicate(l-> l.get(0).startsWith("x"), list));
 	}
 
+	
+	private static boolean checkPredicate(Predicate<List<String>> p, List<String> t) {
+		return p.test(t);
+	}
+	
+	private static void doSomething(Consumer<String> consumer, String s) {
+		consumer.accept(s);
+	}
+	
+	private static String doSomethingFunction(Function<String,String> f, String xyz) {
+		return f.apply(xyz);
+	}
+	
+	private static String doSomethingFunction1(Function<List<String>,String> f, List<String> xyz) {
+		return f.apply(xyz);
+	}
+	
 	private static void doProcessConsumer(String s, Consumer<String> consumer) {
 		consumer.accept(s);
 	}
@@ -58,4 +107,23 @@ public class LambdaExample1 {
 	private static Person setAge(Person p, Function<Person, Person> function) {
 		return function.apply(p);
 	}
+	
+	
+	
+	
+}
+
+@FunctionalInterface
+interface ProcessTrandition{
+	String perform(String s);
+}
+
+class ProcessImpl implements ProcessTrandition{
+
+	@Override
+	public String perform(String s) {
+		System.out.println("doing via interface method "+s);
+		return s;
+	}
+	
 }

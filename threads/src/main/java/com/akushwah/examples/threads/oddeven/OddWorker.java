@@ -14,7 +14,7 @@ public class OddWorker implements Runnable{
 		
 		while(n<=App.MAX){
 			synchronized (p) {
-				if (n % 2 == 0 || p.isOddPrinted()) {
+				while (n % 2 == 0 || p.isOddPrinted()) {
 					try {
 						p.wait();
 					} catch (InterruptedException e) {
