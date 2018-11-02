@@ -1,15 +1,22 @@
 package com.akushwah.java8.examples.lambda;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MethodReferenceExample {
 	public static void main(String[] args) {
-		Thread thread = new Thread(() -> System.out.println("Yo Yo "+Thread.currentThread().getName()));
-		thread.start();
 		
-		thread = new Thread(MethodReferenceExample::process);
-		thread.start();
+		List<String> list = new ArrayList<>();
+		list.add("abc");
+		list.add("xyz");
+		
+		list.stream().forEach(s-> System.out.print(" "+s));
+		list.stream().forEach(MethodReferenceExample::print);
 	}
 	
-	private static void process(){
-		System.out.println("Yo Yo "+Thread.currentThread().getName());
+	
+	private static void print(String s) {
+		System.out.println("ak "+s);
 	}
+	
 }

@@ -2,8 +2,10 @@ package com.akushwah.java8.examples.streams;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class StreamPerformanceTest {
@@ -46,7 +48,7 @@ public class StreamPerformanceTest {
 				Arrays.asList(inputArray).stream().collect(StringBuilder::new, StringBuilder::append,
 						StringBuilder::append);
 
-				System.out.println("Time Taken in Collect: " + (System.currentTimeMillis() - l));
+				System.out.println("Time Taken in String Collect: " + (System.currentTimeMillis() - l));
 
 				l = System.currentTimeMillis();
 				// Arrays.asList(integerArray).stream().collect(Collectors.summingInt(Integer::intValue));
@@ -63,22 +65,9 @@ public class StreamPerformanceTest {
 
 		});
 
-		t1.start();
-		t2.start();
+		 t1.start();
+		 t2.start();
 
-		String[] inputArray2 = new String[] { "Aakash", "Joker", "Anmol", "Ac", "Jagdeep" };
-		// System.out.println(Arrays.asList(inputArray2).stream().reduce((s1, s2) ->
-		// s1.compareTo(s2) > 0 ? s1 : s2));
-		// System.out.println(Arrays.asList(inputArray2).stream().reduce((s1, s2) ->
-		// s1.compareTo(s2) > 0 ? s2 : s1));
-		//
-		MaxMinFinder mmf = Arrays.asList(inputArray2).stream().collect(MaxMinFinder::new, MaxMinFinder::accumulate,
-				MaxMinFinder::combine);
-		System.out.println("In Main: " + mmf.getMax() + " " + mmf.getMin());
-
-		mmf = Arrays.asList(inputArray2).stream().collect(() -> new MaxMinFinder(),
-				(MaxMinFinder m, String s) -> m.accumulate(s), (MaxMinFinder j, MaxMinFinder k) -> j.combine(k));
-		System.out.println("In Main: " + mmf.getMax() + " " + mmf.getMin());
 
 		int i = Stream.of("2", "3", "4", "5").parallel().reduce(0, new BiFunction<Integer, String, Integer>() {
 			@Override
@@ -91,11 +80,75 @@ public class StreamPerformanceTest {
 				return Integer.sum(integer, integer2);
 			}
 		});
+		System.out.println("Reduce Result1 "+ i);
 
-		i = Stream.of("2", "3", "4", "5").parallel().reduce(0,
-				(integer, s) -> Integer.sum(integer, Integer.parseInt(s)), (a, b) -> a + b);
+		i = Stream.of(2, 3, 4, 5).parallel().reduce(0, new BiFunction<Integer, Integer, Integer>() {
+			@Override
+			public Integer apply(Integer integer, Integer s) {
+				return Integer.sum(integer, s);
+			}
+		}, new BinaryOperator<Integer>() {
+			@Override
+			public Integer apply(Integer integer, Integer integer2) {
+				return Integer.sum(integer, integer2);
+			}
+		});
+		System.out.println("Reduce Result2 "+ i);
+		
+		String[] reduceInputArr = new String[] { "2", "3", "4", "5", "6" };
+		i = Arrays.asList(reduceInputArr).stream().parallel().reduce(0, (j, s) -> Integer.sum(j, Integer.parseInt(s)),
+				(a, b) -> a + b);
 
-		System.out.println(i);
+		System.out.println("Reduce Result3 "+ i);
+		reduceInputArr = new String[] {};
+		i = Arrays.asList(reduceInputArr).stream().parallel().reduce(0, (j, s) -> Integer.sum(j, Integer.parseInt(s)),
+				(a, b) -> a + b);
+
+		System.out.println("Reduce Result4"+ i);
+		Integer[] reduceInputArr1 = new Integer[] {1,2,3,4};
+		i = Arrays.asList(reduceInputArr1).stream().parallel().reduce( (j, s) -> (j+s)).get();
+		System.out.println("Reduce Result5 "+ i);
+		reduceInputArr1 = new Integer[] {};
+		Arrays.asList(reduceInputArr1).stream().parallel().reduce( (j, s) -> (j+s)).ifPresent(k -> System.out.println("Reduce Result 6 "+k));
+		System.out.println("Reduce Result6 "+ i);
+		
+		String[] inputArray2 = new String[] { "Aakash", "Joker", "Anmol", "Ac", "Jagdeep" };
+		// System.out.println(Arrays.asList(inputArray2).stream().reduce((s1, s2) ->
+		// s1.compareTo(s2) > 0 ? s1 : s2));
+		// System.out.println(Arrays.asList(inputArray2).stream().reduce((s1, s2) ->
+		// s1.compareTo(s2) > 0 ? s2 : s1));
+		//
+
+		MaxMinFinder mmf = Arrays.asList(inputArray2).stream().collect(new Supplier<MaxMinFinder>() {
+
+			@Override
+			public MaxMinFinder get() {
+				return new MaxMinFinder();
+			}
+		}, new BiConsumer<MaxMinFinder, String>() {
+
+			@Override
+			public void accept(MaxMinFinder u, String t) {
+				u.accumulate(t);
+			}
+
+		}, new BiConsumer<MaxMinFinder, MaxMinFinder>() {
+
+			@Override
+			public void accept(MaxMinFinder t, MaxMinFinder u) {
+				u.combine(t);
+			}
+
+		});
+		System.out.println("In Main: " + mmf.getMax() + " " + mmf.getMin());
+
+		mmf = Arrays.asList(inputArray2).stream().collect(() -> new MaxMinFinder(),
+				(MaxMinFinder m, String s) -> m.accumulate(s), (MaxMinFinder j, MaxMinFinder k) -> j.combine(k));
+		System.out.println("In Main: " + mmf.getMax() + " " + mmf.getMin());
+		
+		mmf = Arrays.asList(inputArray2).stream().collect(MaxMinFinder::new, MaxMinFinder::accumulate,
+				MaxMinFinder::combine);
+		System.out.println("In Main: " + mmf.getMax() + " " + mmf.getMin());
 
 	}
 

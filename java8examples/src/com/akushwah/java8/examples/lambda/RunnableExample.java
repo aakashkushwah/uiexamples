@@ -1,9 +1,13 @@
 package com.akushwah.java8.examples.lambda;
 
 public class RunnableExample {
+	
+	private String abc =" asdf";
 
+	
 	public static void main(String[] args) {
 		RunnableExample re = new RunnableExample();
+		re.abc ="123";
 		Thread t1 = new Thread(re::doSomething);
 		Thread t2 = new Thread(re::doSomething);
 		t1.start();
@@ -23,16 +27,17 @@ public class RunnableExample {
 		});
 		t5.start();
 		
-		Thread t6 = new Thread(()->System.out.println("Job Done by Lambda "+Thread.currentThread().getName()));
+		Thread t6 = new Thread(()-> System.out.println("Job Done by Lambda "+Thread.currentThread().getName()));
 		t6.start();
 	}
 	
 	private void doSomething(){
-		System.out.println("Job done by "+Thread.currentThread().getName());
+		System.out.println("Job done by "+Thread.currentThread().getName()+abc);
 	}
 	
 	private static void doSomethingStatic(){
 		System.out.println("Static Job Done by "+Thread.currentThread().getName());
 	}
+	
 
 }
