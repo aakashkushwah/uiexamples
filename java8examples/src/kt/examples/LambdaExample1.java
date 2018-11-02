@@ -1,5 +1,8 @@
 package kt.examples;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -35,7 +38,10 @@ public class LambdaExample1 {
 			return p;
 		});
 		
-		
+		LocalDate date = LocalDate.now();
+		System.out.println(date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.GERMAN));
+		System.out.println(date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()));
+		System.out.println(date.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("en")));
 
 	}
 

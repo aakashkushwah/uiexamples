@@ -23,8 +23,18 @@ public class DemoStream {
 
 		System.out.println("\n3**********************************");
 		List<String> list = Arrays.asList("Aakash", "Anmol", "Jagdeep", "LessDeep", "MoreDeep");
+		int sum = 0;
+		for (String string : list) {
+			sum += string.length();
+		}
+		
 		System.out.println("\n4**********************************");
-		System.out.println(list.stream().mapToInt(s -> s.length()).reduce((a, b) -> (a + b)).getAsInt());
+		System.out.println(list.parallelStream().mapToInt(s -> s.length()).reduce((a, b) -> (a + b)).getAsInt());
+		
+		List<Integer> letterCountList = list.stream().map(s -> s.length()).collect(Collectors.toList());
+		
+		list.stream().map(s -> s.length()).forEach(System.out::println);
+		
 		System.out.println("\n5**********************************");
 		System.out.println(list.stream().mapToInt(s -> s.length()).reduce(0, (a, b) -> (a + b)));
 		System.out.println("\n6**********************************");

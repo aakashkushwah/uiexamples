@@ -18,13 +18,9 @@ public class FunctionalInterfaceExample {
 
 		Collections.sort(emps, (e1, e2) -> e1.getLastName().compareTo(e2.getLastName()));
 		System.out.println("Printing all employees with surname starting with k");
-		printConditionally(emps, new Condition() {
-
-			@Override
-			public boolean test(Employee e) {
-				return (e.getLastName().startsWith("K"));
-			}
-		});
+		printConditionally(emps, e -> e.getLastName().startsWith("K"));
+		printConditionally(emps, e -> e.getFirstName().startsWith("K"));
+		
 		System.out.println("*******************************************");
 		System.out.println("Printing all employees");
 		
@@ -49,7 +45,16 @@ public class FunctionalInterfaceExample {
 		System.out.println(totalSalary);
 		System.out.println("*******************************************");
 		demoFunction2(supplierEmps, e -> {if(e.getSalary()<15) return "Noida"; else return "Delhi";});
+		
 		printConditionallyPredicate(supplierEmps, p -> true);
+	}
+	
+	private static void printConditionally1(List<Employee> list) {
+		for (Employee employee : list) {
+			if (employee.getLastName().startsWith("k")) {
+				System.out.println(employee);
+			}
+		}
 	}
 
 	private static void printConditionally(List<Employee> list, Condition condition) {
@@ -70,6 +75,14 @@ public class FunctionalInterfaceExample {
 
 	private static void printAll(List<Employee> emps) {
 		emps.forEach(System.out::println);
+		emps.forEach(new Consumer<Employee>() {
+
+			@Override
+			public void accept(Employee t) {
+				System.out.println(t);				
+			}
+		});
+		emps.forEach(e -> System.out.println(e+" asdfs fd"));
 	}
 
 	private static Employee getInstance(Supplier<Employee> supplier) {
