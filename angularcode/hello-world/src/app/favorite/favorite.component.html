@@ -1,0 +1,8 @@
+<h2>Fav Works</h2>
+<br>
+<span 
+  class="glyphicon"
+  [class.glyphicon-star] = "isFav"
+  [class.glyphicon-star-empty] = "!isFav"
+  (click) = "onClick()"
+></span>

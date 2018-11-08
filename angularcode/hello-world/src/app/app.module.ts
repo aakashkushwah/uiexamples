@@ -1,3 +1,4 @@
+import { MyTitleCasePipe } from './mytitlecase.pipe';
 import { SummaryPipe } from './summary.pipe';
 import { AuthorService } from './author.service';
 import { CoursesService } from './courses.service';
@@ -9,13 +10,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { FavoriteComponent } from './favorite/favorite.component';
+import { TitleCasePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     CourseComponent,
     AuthorsComponent,
-    SummaryPipe
+    SummaryPipe,
+    FavoriteComponent,
+    MyTitleCasePipe
   ],
   imports: [
     BrowserModule,

@@ -3,33 +3,7 @@ import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-course',
-  template : `
-    <table>
-      <tr>
-        <td [attr.colspan]>
-        </td>
-      </tr>
-    </table>
-    <button class="btn btn-primary" [class.active]="isActive">Save</button>
-    <button [style.backgroundColor] = "isActive? 'blue' : 'yellow'">Save2</button>
-    <br>
-    <button (click) = "onSave($event)">Save3</button>
-    <br>
-    <input [value]="email" (keyup.enter)="email = $event.target.value; onKeyUp()"/>
-    <input [(ngModel)] = "email" (keyup.enter) = "onKeyUp()"/>
-    <br>
-    {{ pipers.title | uppercase}}
-    <br>
-    {{ pipers.rating | number:'2.1-1'}}
-    <br>
-    {{ pipers.students |number}}
-    <br>
-    {{ pipers.price | currency:'INR':true:'3.2-2'}}
-    <br>
-    {{ pipers.releaseDate |date:'short'}}
-    <br>
-    {{text | summary}}
-  `
+  templateUrl : './course.component.html'
 })
 export class CourseComponent implements OnInit {
 
@@ -39,6 +13,7 @@ export class CourseComponent implements OnInit {
   colspan = 2;
   isActive = false;
   email = "me@abc.com";
+  sampleTitle : string;
 
   pipers = {
     title: "The complete shock",
