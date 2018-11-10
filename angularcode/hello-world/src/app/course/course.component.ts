@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CoursesService } from '../courses.service';
 
 @Component({
@@ -14,6 +14,8 @@ export class CourseComponent implements OnInit {
   isActive = false;
   email = "me@abc.com";
   sampleTitle : string;
+  @Input('akinput') ix:boolean;
+  @Output() change = new EventEmitter();
 
   pipers = {
     title: "The complete shock",
@@ -35,6 +37,10 @@ export class CourseComponent implements OnInit {
 
   onKeyUp(){
     console.log(this.email);
+  }
+
+  onClick(){
+    this.change.emit();
   }
 
 

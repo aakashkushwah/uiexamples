@@ -20,8 +20,16 @@
 
 <router-outlet></router-outlet> -->
 <h1>Angular</h1>
-<app-course></app-course>
+<!--<app-course [akinput]='ix' (click)="onCourseChanged()"></app-course>-->
 <!-- <app-authors></app-authors>-->
-<!-- <app-favorite></app-favorite>-->
+<!-- <app-favorite [isFav]="post.isFavorite" (change)="onFavChanged($event)"></app-favorite> -->
+<!-- <ak-panel>
+  <ng-container class="heading">Heading</ng-container>  
+  <ng-container class="body">
+    <h2>Body</h2>
+    <p>Some Content Here...</p>
+  </ng-container>
+</ak-panel> -->
+<ak-like [likesCount]="tweet.likesCount" [isActive]="tweet.isLiked">
 
- 
+</ak-like>
