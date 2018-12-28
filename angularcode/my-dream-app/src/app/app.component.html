@@ -1,0 +1,22 @@
+<div *ngIf="isValid">
+  Valid Content
+</div>
+<div *ngIf="!isValid">
+  Not so valid Content
+</div>
+<div *ngIf="isValid;then content else other_content">here is ignored</div>    
+<ng-template #content>content here...</ng-template>
+<ng-template #other_content>other content here...</ng-template>
+<div><button (click)="onAdd()">Add</button></div>
+
+
+<div>
+  <ul>
+    <li *ngFor="let course of courses; even as isEven">
+      {{ course.name }} <span *ngIf="isEven">Even </span>
+      <button (click)="onChange(course)">Remove</button>
+    </li>
+  </ul>
+</div>
+<div><button (click)="loadCourse()">Load Courses</button></div>
+

@@ -27,6 +27,11 @@ export class AppComponent {
     likesCount: 10,
     isLiked:true
   }
+  canSave=true;
 
+  task = {
+    title : 'Review App',
+    assignee: null
+  }
   
 }

@@ -33,3 +33,17 @@
 <ak-like [likesCount]="tweet.likesCount" [isActive]="tweet.isLiked">
 
 </ak-like>
+
+<br>
+<button
+  [ngStyle]="{
+    'backgroundColor': canSave? 'blue' : 'gray',
+    'color': canSave?'white':'black',
+    'fontWeight': canSave?'bold':'normal'
+  }"
+>
+  Save
+</button>
+<br>
+<span>{{task.assignee?.name}}</span>
+<input type="text" [appInputFormat]="'uppercase'">
