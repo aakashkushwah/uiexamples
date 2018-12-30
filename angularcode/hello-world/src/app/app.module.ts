@@ -3,7 +3,7 @@ import { SummaryPipe } from './summary.pipe';
 import { AuthorService } from './author.service';
 import { CoursesService } from './courses.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,7 @@ import { ZippyComponent } from './zippy/zippy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { ChangeFormComponent } from './change-form/change-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
     ZippyComponent,
     ContactFormComponent,
     NewCourseFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    ChangeFormComponent
   ],
   imports: [
     BrowserModule,

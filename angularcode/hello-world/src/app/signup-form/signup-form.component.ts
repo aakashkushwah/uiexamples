@@ -17,10 +17,7 @@ export class SignupFormComponent {
     password: new FormControl('', Validators.required),
     topics: new FormArray([])
   });
-
-  constructor(fb: FormBuilder){
-
-  }
+  
   get username(){
     return this.form.get('username');
   }
