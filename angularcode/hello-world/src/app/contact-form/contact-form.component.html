@@ -1,4 +1,4 @@
-<form>
+<form #f="ngForm" (ngSubmit)="submit(f)"> 
   <div class="form-group">
     <label for="firstName">First Name</label>
     <input 
@@ -19,5 +19,22 @@
     <label for="comment">Comment</label>
     <textarea ngModel name="comment" id="comment" class="form-control"></textarea>
   </div>
-  <button class="btn btn-primary">Submit</button>
+  <div class="checkbox"><label><input type="checkbox" ngModel name="isSubscribed">Subscribe to the mailing list</label></div>
+  
+  <div class="form-group">
+    <label for="contactMethod">Contact Method</label>
+    <select multiple ngModel name="contactMethod" id="contactMethod" class="form-control">
+      <option *ngFor="let method of contactMethods" [value]="method.id">{{method.name}}</option>
+    </select>
+  </div> 
+  <div *ngFor="let method of contactMethods" class="radio">
+    <label>
+      <input type="radio" ngModel name="contactMethod" [value]="method.id">{{method.name}}
+    </label>
+  </div>
+  
+  <p>
+    {{f.value|json}}
+  </p>
+  <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>
