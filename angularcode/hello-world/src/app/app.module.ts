@@ -23,6 +23,8 @@ import { NewCourseFormComponent } from './new-course-form/new-course-form.compon
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { ChangeFormComponent } from './change-form/change-form.component';
 import { PostsComponent } from './posts/posts.component';
+import { GithubFollowersComponent } from './github-followers/github-followers.component';
+import { GithubFollowersService } from './github-followers.service';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { PostsComponent } from './posts/posts.component';
     NewCourseFormComponent,
     SignupFormComponent,
     ChangeFormComponent,
-    PostsComponent
+    PostsComponent,
+    GithubFollowersComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { PostsComponent } from './posts/posts.component';
     CoursesService,
     AuthorService,
     PostService,
+    GithubFollowersService,
     {provide: ErrorHandler, useClass: AKErrorHandler}
   ],
   bootstrap: [AppComponent]
