@@ -1,3 +1,8 @@
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { GithubProfileComponent } from './github-profile/github-profile.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { AKErrorHandler } from './common/app-error-handler';
 import { PostService } from './services/post.service';
 import { MyTitleCasePipe } from './mytitlecase.pipe';
@@ -44,14 +49,25 @@ import { GithubFollowersService } from './github-followers.service';
     SignupFormComponent,
     ChangeFormComponent,
     PostsComponent,
-    GithubFollowersComponent
+    GithubFollowersComponent,
+    NavbarComponent,
+    HomeComponent,
+    GithubProfileComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeComponent},
+      {path: 'followers', component: GithubFollowersComponent},
+      {path: 'followers/:id', component: GithubProfileComponent},
+      {path: 'posts', component: PostsComponent},
+      {path: '**', component: NotFoundComponent}
+    ])
   ],
   providers: [
     CoursesService,
