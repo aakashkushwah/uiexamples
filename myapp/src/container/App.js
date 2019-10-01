@@ -1,50 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import Person from '../components/Persons/person/Person';
-
-// function App() {
-//   return (
-//     <div className="App">
-//         <p>
-//           Hi there I am a react app
-//         </p>
-//     </div>
-//   );
-// }
-
-// const App = (props) => {
-
-//   const [personStates, setPersonsState] = useState({
-//     persons: [{name: 'Max', age: '24'}, {name: 'Manu', age: '29'}, {name: 'Aakash', age: '32'}]
-//   });
-
-//   const[otherState, setOtherState] = useState('Some other value');
-
-//   const switchNameHandler = () => {
-//     setPersonsState({
-//       persons: [{name: 'Maxy' , age: '24'}, {name: 'Manu', age: '29'}, {name: 'Aakash', age: '32'}]
-//     });
-//   };
-
-//   console.log(personStates);
-//   console.log(otherState);
-
-//     return (
-//       <div className="App">
-//           <h1>
-//             Hi there I am a react app
-//           </h1>
-//           <p>This is really working!!</p>
-//           <button onClick={switchNameHandler}>Switch Name</button>
-//           <Person name={personStates.persons[0].name} age={personStates.persons[0].age}></Person>
-//           <Person name={personStates.persons[1].name} age={personStates.persons[1].age}>My Hobbies: Racing</Person>
-//           <Person name={personStates.persons[2].name} age={personStates.persons[2].age}>{otherState}</Person>
-//       </div>
-//     );
-
-
-// }
-// export default App;
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -54,8 +11,6 @@ class App extends Component {
   };
 
   switchNameHandler = (newName) => {
-    // console.log("Clicked");
-    // this.state.persons[0].name="MaxC"; //do not do this
     this.setState({
       persons: [{ name: newName, age: '24' }, { name: 'Manu', age: '29' }, { name: 'Aakash', age: '32' }]
     });
@@ -68,7 +23,6 @@ class App extends Component {
     const myperson = {
         ...this.state.persons[mypersonIndex]
       }; 
-    //Object.assign({}, this.state.persons[mypersonIndex])
     myperson.name = event.target.value;
 
     const mypersons =  [...this.state.persons];
@@ -93,45 +47,27 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = '';
-
     if (this.state.showPersons) {
       persons = (
         <div >
-          {this.state.persons.map((per, index) => {
-            return <Person
-              click={()=>this.deletePersonHandler(index)}
-              changed={(event) => this.nameChangedHandler(event, per.id)}
-              name={per.name}
-              age={per.age}
-              key={per.id}>
-              {per.someOtherstate}
-            </Person>
-          })}
+          <Persons 
+            persons={this.state.persons} 
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}>            
+          </Persons>
         </div>
       );
-      btnClass = styles.Red;
     }
-
-    const pcls = [];
-    if(this.state.persons.length <= 2){
-      pcls.push('Red');
-    }
-    if(this.state.persons.length <= 1){
-      pcls.push('bold');
-    }
-
     return (
         <div className={styles.App}>
-          <h1>
-            Hi there I am a react app
-            </h1>
-          <p className={pcls.join(' ')}>This is really working!!</p>
-          <button className={btnClass} onClick={this.togglePersonHandler}>Toggle Persons</button>
+          <Cockpit
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonHandler}>
+          </Cockpit>
           {persons}
         </div>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi from create element variation'));
   }
 }
 export default App;
