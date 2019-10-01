@@ -93,11 +93,16 @@ class App extends Component {
 
   render() {
     const bstyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
+      // ':hover': {
+      //   backgroundColor: 'lightgreen',
+      //   color: 'black'
+      // }
     };
 
     let persons = null;
@@ -116,17 +121,30 @@ class App extends Component {
           })}
         </div>
       );
+      bstyle.backgroundColor='red';
+      // bstyle[':hover']= {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // };
+    }
+
+    const pcls = [];
+    if(this.state.persons.length <= 2){
+      pcls.push('red');
+    }
+    if(this.state.persons.length <= 1){
+      pcls.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>
-          Hi there I am a react app
-          </h1>
-        <p>This is really working!!</p>
-        <button onClick={this.togglePersonHandler} style={bstyle}>Toggle Persons</button>
-        {persons}
-      </div>
+        <div className="App">
+          <h1>
+            Hi there I am a react app
+            </h1>
+          <p className={pcls.join(' ')}>This is really working!!</p>
+          <button onClick={this.togglePersonHandler} style={bstyle}>Toggle Persons</button>
+          {persons}
+        </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi from create element variation'));
   }
